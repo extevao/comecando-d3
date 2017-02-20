@@ -11,27 +11,27 @@ var canvas = d3
   .attr('height', height);
 
 var widthScale = d3.scaleLinear()
-  .domain([0, 80])
+  .domain([0, 83])
   .range([0, width]);
 
 var colorScale = d3.scaleLinear()
-  .domain([0, 80])
+  .domain([0, 83])
   .range(['red', 'blue']);
 
 var bars = canvas.selectAll('rect')
   .data(dataArray)
   .enter()
   .append('rect')
-  .attr('width', function (dado) {
-    return widthScale(dado);
-  })
+  .attr('width', 50)
   .attr('height', 50)
-  .attr('fill', function(dado){
-    return colorScale(dado);
-  })
-  .attr('y', function (dado, index) {
-    return index * 100;
-  });
+  .attr('fill', '#000')
+  .attr('y', 0);
 
-console.log(bars);
+bars.transition()
+  .duration(1000)
+  .attr('y', (dado, index) => index * 100)
+  .transition()
+  .duration(1000)
+  .attr('width', dado => widthScale(dado))
+  .attr('fill', dado => colorScale(dado));
 
