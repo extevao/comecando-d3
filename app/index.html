@@ -6,18 +6,51 @@
     <title>Teste D3</title>
     <script type="text/javascript" src="d3/d3.min.js"></script>
     <style>
-        svg{
-            background-color: #ccc;
+        .chart rect {
+            fill: steelblue;
+        }
+        
+        .chart text {
+            fill: white;
+            font: 10px sans-serif;
+            text-anchor: end;
         }
     </style>
 
 </head>
 
 <body>
+  
 
-   
+    <script>
+        var dataArray = [ 30, 15, 50, 70, 80];
+        var width = 500;
+        var height = 500;
 
-    <script type="text/javascript" src="js/script.js"></script>
+
+        var canvas = d3.select('body')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height)
+            .style('background-color', '#ccc');
+
+        var widthScale = d3.scaleLinear()
+            .domain([0, 80]) //maior e menor valor dentro dos dados
+            .range([0, width]); //proporção de tamanho então se 
+        
+        var colorScale = d3.scaleLinear()
+            .domain([0, 80])
+            .range(['red', 'blue']);
+
+        var bars = canvas.selectAll('rect')
+            .data(dataArray)
+            .enter()
+                .append('rect')
+                .attr('width', elemento => widthScale(elemento) )
+                .attr('height', 15 )
+                .attr('fill', elemento => colorScale(elemento))
+                .attr('y', (elemento, indice) => indice * 100);
+    </script>
 </body>
 
 </html>
