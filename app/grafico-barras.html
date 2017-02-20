@@ -21,16 +21,31 @@
 <body>
 
     <div class="chart">
-        <div style="width: 40px;">4</div>
-        <div style="width: 80px;">8</div>
-        <div style="width: 150px;">15</div>
-        <div style="width: 160px;">16</div>
-        <div style="width: 230px;">23</div>
-        <div style="width: 420px;">42</div>
+
     </div>
 
     <script>
         var data = [4, 8, 15, 16, 23, 42];
+
+        var chart = d3.select('.chart');
+
+        var bar = chart.selectAll('div');
+
+        var barUpdate = bar.data(data);
+
+        var barEnter = barUpdate.enter().append('div');
+        barEnter.style('width', function (elemento) {
+            return elemento * 10 + 'px';
+        });
+        barEnter.text(function (elemento) {
+            return elemento;
+        });
+
+
+
+
+
+        //         .text(function(dado){ return dado });
     </script>
 
 </body>

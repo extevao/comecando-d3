@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>SVG</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="d3/d3.min.js"></script>
+    <style>
+        rect {
+            font: 10px sans-serif;
+            background-color: steelblue;
+            text-align: right;
+            padding: 3px;
+            margin: 1px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <script>
+        var data = [4, 8, 15, 16, 23, 42];
+
+        var width = 500;
+        var height = 500;
+
+        var canvas = d3.select('body')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+
+        var bars = canvas.selectAll('rect')
+            .data(data)
+            .enter()
+            .append('rect')
+            .attr('width', 10)
+            .attr('height', 19)
+            .attr('y', function (elemento, indice) {
+                return indice * 20;
+            })
+            .attr('fill', 'steelblue');
+
+        bars.transition()
+            .duration(1000)
+            .attr('width', elemento => elemento * 10);
+    </script>
+</body>
+
+</html>
