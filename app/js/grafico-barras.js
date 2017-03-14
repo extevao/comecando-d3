@@ -8,7 +8,8 @@ var width = 500;
 var height = 100;
 var barPadding = 1;
 
-var svg = d3.select('body').append('svg')
+var svg = d3.select('body')
+    .append('svg')
     .attr('width', width)
     .attr('height', height);
 
