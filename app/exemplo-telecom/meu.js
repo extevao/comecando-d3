@@ -6,7 +6,7 @@ var color = d3.scale.category20();
 var x = d3.scale
     .ordinal()
     .rangeRoundBands([0, width], .35);
-var y = d3.scale
+var y = d3va.scale
     .linear()
     .rangeRound([height, 0]);
 
@@ -17,11 +17,8 @@ var dataIntermediate = parametrosEixoX.map(function (parametro) {
     });
 });
 
-console.log(dataIntermediate)
 
 var dataStackLayout = d3.layout.stack()(dataIntermediate);
-
-console.log(dataStackLayout)
 
 x.domain(dataStackLayout[0].map(function (d) {
     return d.x;
@@ -31,8 +28,6 @@ y.domain([0,
     d3.max(dataStackLayout[dataStackLayout.length - 1],
         function (d) { return d.y0 + d.y; })
 ]).nice();
-
-
 
 var svg = d3.select('body')
     .append('svg')
