@@ -3,20 +3,23 @@ var height = 600;
 var barPadding = 1;
 var color = d3.scale.category20();
 
-var x = d3.scale
-    .ordinal()
-    .rangeRoundBands([0, width], .35);
-var y = d3.scale
-    .linear()
-    .rangeRound([height, 0]);
+
 
 var dataIntermediate = parametrosEixoX.map(function (parametro) {
     return relacaoLigacoesOperadoras.map(function (relacaoOperadora) {
-        return { x: relacaoOperadora.nome, y: relacaoOperadora[parametro] };
+        return { x: relacaoOperadora.nome, y: relacaoOperadora[parametro], legenda: parametro};
     });
 });
-
 var dataStackLayout = d3.layout.stack()(dataIntermediate);
+console.log(dataStackLayout)
+
+var x = d3.scale
+    .ordinal()
+    .rangeRoundBands([0, width], .35);
+
+var y = d3.scale
+    .linear()
+    .rangeRound([height, 0]);
 
 x.domain(dataStackLayout[0].map(function (d) {
     return d.x;
@@ -39,25 +42,25 @@ var canvas = d3.select('body')
 var layer = canvas.selectAll('stack')
   .data(dataStackLayout)
   .enter()
-    .append('g')
-    .style("fill", function (d, i) {
-        return color(i);
-    });
+    .append('g');
 
 
 layer.selectAll("rect")
     .data(function (d) {
         return d;
     })
-    .enter()
-    .append("rect")
+    .enter().append("rect")
     .attr("x", function (d) {
-        return y(d.y0 + d.y);
-    })
-    .attr("y", function(d, indice){
         return x(d.x);
     })
-    .attr("height", x.rangeBand() )
-    .attr("width", function (d) {
+    .attr("y", function (d) {
+        return y(d.y + d.y0);
+    })
+    .attr("height", function (d) {
         return y(d.y0) - y(d.y + d.y0);
-    } );
+    })
+    .attr("width", x.rangeBand())
+    .attr("class", function (d, i) {
+        return d.legenda;
+    });
+

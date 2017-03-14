@@ -39,7 +39,7 @@ var layer = svg.selectAll("stack")
     .enter().append("g")
     .attr("class", "stack")
     .style("fill", function (d, i) {
-        return color(i);
+        console.log(d)
     });
 
 layer.selectAll("rect")
