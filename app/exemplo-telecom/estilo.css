@@ -2,9 +2,9 @@
     fill:#22ff00;
 }
 .naoatendidas { 
-     background-color:#ffe700;
+     fill:#ffe700;
 }
-rect.falhas { 
+.falhas { 
     fill:#ff0000;  
 }
 .ocupadas {  
