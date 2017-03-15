@@ -1,4 +1,4 @@
-var dataT = [
+var data = [
     { letter: 'A', frequency: .08167 },
     { letter: 'B', frequency: .01492 },
     { letter: 'C', frequency: .02782 },
@@ -27,7 +27,7 @@ var dataT = [
     { letter: 'Z', frequency: .00074 }];
 
 
-var data = [
+var datat = [
   {name: "Locke",    value:  4},
   {name: "Reyes",    value:  8},
   {name: "Ford",     value: 15},
