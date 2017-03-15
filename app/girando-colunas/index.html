@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Girando em colunas</title>
+    <meta charset="UTF-8">
+    <script src="../d3/d3.v3.min.js"></script>
+    <style>
+        .bar {
+            fill: steelblue;
+        }
+        
+        .axis text {
+            font: 10px sans-serif;
+        }
+        
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+        
+        .x.axis path {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <svg class="chart"></svg>
+    <script src="data.js"></script>
+    <script src="girando-colunas.js"></script>
+</body>
+
+</html>
