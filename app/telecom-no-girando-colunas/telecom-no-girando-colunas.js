@@ -50,14 +50,14 @@ canvas.append("g")
     .call(xAxis);
 
 canvas.append("g")
-        .attr("class", "y axis")
-        .call(yAxis)
+    .attr("class", "y axis")
+    .call(yAxis)
     .append('text')
-        .attr("transform", "rotate(-90)")
-        .attr('y', 6)
-        .attr('dy', '.71em')
-        .style("text-anchor", "end")
-        .text("Quantidade de ligações");
+    .attr("transform", "rotate(-90)")
+    .attr('y', 6)
+    .attr('dy', '.71em')
+    .style("text-anchor", "end")
+    .text("Quantidade de ligações");
 
 var layer = canvas.selectAll('stack')
     .data(dataStackLayout)
@@ -82,6 +82,11 @@ layer.selectAll("rect")
     .attr("class", function (d, i) {
         return d.legenda;
     })
-    .attr("text", function(d){
-        return d.y;
-    })
+    .append("text")
+        .text(function (d) {
+            return d.y;
+        })
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "11px")
+        .attr("fill", "white")
+        .attr("text-anchor", "middle")

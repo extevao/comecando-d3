@@ -1,6 +1,6 @@
 var relacaoLigacoesOperadoras = [
     {
-        nome: 'Operadora muito boa',
+        nome: 'boa',
         falhas: 80,
         atendidas: 55,
         naoatendidas: 35,
@@ -8,7 +8,7 @@ var relacaoLigacoesOperadoras = [
         congestionada: 25,
         blackList: 25
     }, {
-        nome: 'Operadora 13',
+        nome: '13',
         falhas: 65,
         atendidas: 50,
         naoatendidas: 35,
@@ -65,13 +65,77 @@ var relacaoLigacoesOperadoras = [
         congestionada: 0,
         blackList: 0
     }, {
-        nome: 'Sei la 2',
+        nome: 'Sei 2',
         falhas: 20,
         atendidas: 45,
         naoatendidas: 25,
         ocupadas: 30,
         congestionada: 0,
         blackList: 0
+    },{
+        nome: 'Sei 4',
+        falhas: 20,
+        atendidas: 45,
+        naoatendidas: 25,
+        ocupadas: 30,
+        congestionada: 0,
+        blackList: 0
+    },{
+        nome: 'Sei 3',
+        falhas: 20,
+        atendidas: 45,
+        naoatendidas: 25,
+        ocupadas: 30,
+        congestionada: 0,
+        blackList: 0
+    },{
+        nome: 'Rafael',
+        falhas: 20,
+        atendidas: 45,
+        naoatendidas: 25,
+        ocupadas: 30,
+        congestionada: 0,
+        blackList: 0
+    },{
+        nome: 'Teste',
+        falhas: 20,
+        atendidas: 45,
+        naoatendidas: 25,
+        ocupadas: 30,
+        congestionada: 0,
+        blackList: 0
+    },{
+        nome: 'BRASIL',
+        falhas: 66,
+        atendidas: 50,
+        naoatendidas: 11,
+        ocupadas: 30,
+        congestionada: 0,
+        blackList: 0
+    },{
+        nome: 'wi',
+        falhas: 20,
+        atendidas: 10,
+        naoatendidas: 11,
+        ocupadas: 30,
+        congestionada: 0,
+        blackList: 0
+    },{
+        nome: 'wi',
+        falhas: 50,
+        atendidas: 150,
+        naoatendidas: 11,
+        ocupadas: 30,
+        congestionada: 0,
+        blackList: 0
+    },{
+        nome: 'pomba',
+        falhas: 72,
+        atendidas: 150,
+        naoatendidas: 26,
+        ocupadas: 66,
+        congestionada: 4,
+        blackList: 5
     }
 ];
 
