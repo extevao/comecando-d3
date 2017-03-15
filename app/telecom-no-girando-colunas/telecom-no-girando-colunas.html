@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Girando em colunas</title>
+    <meta charset="UTF-8">
+    <script src="../d3/d3.v3.min.js"></script>
+    <style>
+        .atendidas {
+            fill: #22ff00;
+        }
+        
+        .naoatendidas {
+            fill: #ffe700;
+        }
+        
+        .falhas {
+            fill: #ff0000;
+        }
+        
+        .ocupadas {
+            fill: #ff6700;
+        }
+        
+        .congestionada {
+            fill: #990000;
+        }
+        
+        .blackList {
+            fill: #7f7f7f;
+            ;
+        }
+        
+        .axis text {
+            font: 10px sans-serif;
+        }
+        
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+        
+        .x.axis path {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script src="data.js"></script>
+    <script src="telecom-no-girando-colunas.js"></script>
+</body>
+
+</html>
