@@ -1,0 +1,23 @@
+.atendidas {
+    fill: #22ff00;
+}
+
+.naoatendidas {
+    fill: #ffe700;
+}
+
+.falhas {
+    fill: #ff0000;
+}
+
+.ocupadas {
+    fill: #ff6700;
+}
+
+.congestionada {
+    fill: #990000;
+}
+
+.blackList {
+    fill: #7f7f7f;
+}
