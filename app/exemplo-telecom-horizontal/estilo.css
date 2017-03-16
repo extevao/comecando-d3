@@ -1,3 +1,5 @@
+
+
 .atendidas {
     fill: #22ff00;
 }
@@ -20,4 +22,27 @@
 
 .blackList {
     fill: #7f7f7f;
+}
+
+.axis text {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #4a5056;
+    shape-rendering: crispEdges;
+}
+
+.x.axis path {
+    display: none;
+}
+.tick text{
+    fill: #929699;
+}
+
+.bar:hover {
+  stroke: black;
+  stroke-width: 1;
 }
