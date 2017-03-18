@@ -15,7 +15,7 @@ function atualizandoElementosJaExistentes() {
         });
 }
 
-var data = [30];
+var data = [40];
 
 var canvas = d3.select('body')
     .append('svg')
@@ -35,5 +35,9 @@ var circle2 = canvas.append('circle')
 
 d3.selectAll('circle')
     .data(data)
+    .attr('r', function(d){
+        return d;
+    })
     .exit()
-    .remove();
+    // .remove();
+    .attr('fill', 'blue')
