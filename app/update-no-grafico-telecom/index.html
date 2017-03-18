@@ -57,7 +57,34 @@
     <script src="data.js"></script>
     <script src="telecom-operadoras.js"></script>
     <script>
-        fluxoOperadorasHorizontal(relacaoLigacoesOperadoras);
+        document.querySelector('#atualiza').addEventListener('click', atualizaGrafico)
+        fluxoOperadorasHorizontal(fluxoOperadoras, eixoX);
+
+
+        function atualizaGrafico () {
+            var operadoras = d3.selectAll('#operadoras-horizontal svg');
+
+            var dataIntermediate = parametrosEixoX.map(function (parametro) {
+                return relacaoLigacoesOperadoras.map(function (relacaoOperadora) {
+                    return { x: relacaoOperadora.nome, y: relacaoOperadora[parametro], legenda: parametro };
+                });
+            });
+
+
+            var dataStackLayout = d3.layout.stack()(dataIntermediate);
+            var dataset = dataStackLayout.map(function (group) {
+                return group.map(function (d) {
+                    // Invert the x and y values, and y0 becomes x0
+                    return {
+                        x: d.y,
+                        y: d.x,
+                        x0: d.y0,
+                        legenda: d.legenda
+                    };
+                });
+            });
+   
+        }
     </script>
 
 </body>

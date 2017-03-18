@@ -1,12 +1,11 @@
-function fluxoOperadorasHorizontal(data) {
-    console.log('teste')
+function fluxoOperadorasHorizontal(data, parametrosEixoX) {
 
     var margin = { top: 20, right: 30, bottom: 30, left: 110 };
     var width = 500 - margin.left - margin.right;
     var height = 100 - margin.top - margin.bottom;
 
     var dataIntermediate = parametrosEixoX.map(function (parametro) {
-        return relacaoLigacoesOperadoras.map(function (relacaoOperadora) {
+        return data.map(function (relacaoOperadora) {
             return { x: relacaoOperadora.nome, y: relacaoOperadora[parametro], legenda: parametro };
         });
     });
@@ -54,7 +53,7 @@ function fluxoOperadorasHorizontal(data) {
         .orient('left');
     /* FIM criando legenda do eixo x */
 
-    svg = d3.select('#operadoras-horizontal')
+    var svg = d3.select('#operadoras-horizontal')
         .append('svg')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)

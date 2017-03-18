@@ -1,4 +1,4 @@
-var relacaoLigacoesOperadoras = [
+var fluxoOperadoras = [
      {
         nome: '13',
         falhas: 65,
@@ -43,7 +43,7 @@ var relacaoLigacoesOperadoras = [
     }
 ];
 
-var parametrosEixoX = [
+var eixoX = [
     'falhas',
     'atendidas',
     'naoatendidas',
