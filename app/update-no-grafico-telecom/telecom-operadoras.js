@@ -64,7 +64,7 @@ function fluxoOperadorasHorizontal(data, parametrosEixoX) {
         .data(dataset)
         .enter()
         .append('g');
-
+    
     var rects = groups.selectAll('rect')
         .data(function (d) {
             return d;
@@ -99,14 +99,14 @@ function fluxoOperadorasHorizontal(data, parametrosEixoX) {
         });
 
     /* Adicionando as legendas */
-    svg.append('g')
-        .attr('class', 'axis')
-        .attr('transform', 'translate(0,' + height + ')')
-        .call(xAxis);
+    // svg.append('g')
+    //     .attr('class', 'axis')
+    //     .attr('transform', 'translate(0,' + height + ')')
+    //     .call(xAxis);
 
-    svg.append('g')
-        .attr('class', 'axis')
-        .call(yAxis);
+    // svg.append('g')
+    //     .attr('class', 'axis')
+    //     .call(yAxis);
     /* FIM Adicionando as legendas */
 
     rects.transition()
