@@ -1,4 +1,5 @@
-
+function fluxoOperadorasHorizontal(data) {
+    console.log('teste')
 
     var margin = { top: 20, right: 30, bottom: 30, left: 110 };
     var width = 500 - margin.left - margin.right;
@@ -118,5 +119,10 @@
         .attr('width', function (d) {
             return x(d.x);
         });
+}
+
+
+
+
 
 
