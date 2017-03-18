@@ -4,7 +4,7 @@
 <head>
     <title></title>
     <meta charset="UTF-8">
-    <script src="d3/d3.js"></script>
+    <script src="d3/d3.v3.min.js"></script>
     <style>
         svg {
             background-color: #ccc;
@@ -16,7 +16,147 @@
 <body>
 
 
-    <script src="ney-simoes/script.js"></script>
+    <!-- <script src="ney-simoes/script.js"></script> -->
+    <script>
+        var margin = {
+                top: 100,
+                right: 20,
+                bottom: 100,
+                left: 40
+            },
+            width = 600 - margin.left - margin.right,
+            height = 600 - margin.top - margin.bottom;
+
+        var data1 = [{
+                "TimeStamp": "2014-02-28T23:00:00.000Z",
+                "Value": 200
+            },
+            {
+                "TimeStamp": "2014-02-28T23:15:00.000Z",
+                "Value": 200
+            },
+            {
+                "TimeStamp": "2014-02-28T23:15:00.000Z",
+                "Value": 400
+            }
+        ];
+
+        var data2 = [{
+                "TimeStamp": "2014-02-28T23:00:00.000Z",
+                "Value": 200
+            },
+            {
+                "TimeStamp": "2014-02-28T23:15:00.000Z",
+                "Value": 100
+            }
+        ];
+
+        var data3 = [{
+                "TimeStamp": "2014-02-28T23:00:00.000Z",
+                "Value": 200
+            },
+            {
+                "TimeStamp": "2014-02-28T23:15:00.000Z",
+                "Value": 100
+            }
+        ];
+
+        var z = d3.scale.ordinal().range(["yellow", "red", "lightblue"]);
+
+        var dataSet = new Array();
+        dataSet.push(data1, data2, data3);
+
+        dataSet = dataSet.map(function(d, i) {
+            var j,
+                columnTotal = 0,
+                y0 = 0;
+            for (j = 0; j < d.length; j++) {
+                columnTotal += d[j].Value;
+            }
+            console.log(columnTotal);
+            for (j = 0; j < d.length; j++) {
+                var y = d[j].Value / columnTotal;
+                d[j] = {
+                    x: i,
+                    y: y,
+                    y0: y0
+                };
+                y0 += y;
+            }
+            return d;
+        });
+        console.log(JSON.stringify(dataSet))
+
+        var y = d3.scale.linear()
+            .domain([0, 1])
+            .range([height, 0]);
+
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left")
+            .tickFormat(d3.format(".0%"));
+
+        var x = d3.scale.ordinal()
+            .rangeRoundBands([0, width], .05)
+            .domain(dataSet.map(function(d) {
+                return d[0].x
+            }));
+
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom");
+
+        var svgSt = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+        var valgroup = svgSt.selectAll("g.valgroup")
+            .data(dataSet)
+            .enter().append("svg:g")
+            .attr("class", "valgroup");
+
+        var rectSt = valgroup.selectAll("rect")
+            .data(function(d) {
+                return d;
+            })
+            .enter().append("rect")
+            .attr("x", function(d) {
+                return x(d.x);
+            })
+            .attr("width", x.rangeBand())
+            .attr("y", function(d) {
+                return y(d.y0 + d.y);
+            })
+            .attr("height", function(d) {
+                return y(d.y0) - y(d.y0 + d.y);
+            })
+            .style("fill", function(d, i) {
+                return z(i);
+            });
+
+        svgSt.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis)
+            .selectAll("text")
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", "-.55em")
+            .attr("transform", "rotate(-90)");
+
+        svgSt.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("Value ($)");
+    </script>
 </body>
 
 </html>
