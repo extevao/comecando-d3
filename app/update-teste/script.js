@@ -1,4 +1,4 @@
-d3.select('body')
+var p = d3.select('body')
     .selectAll('p')
     .data([4, 8, 15, 16, 23, 42])
     .enter()
@@ -8,9 +8,7 @@ d3.select('body')
     });
 
 
-var p = d3.select('body')
-    .selectAll('p')
-    .data([4, 8, 15, 16, 23, 42, 47])
+p.style('color', 'blue')
     .text(function (d) {
         return `Eu sou o número atualizado ${d}!`;
     });
