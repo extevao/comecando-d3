@@ -61,14 +61,36 @@
         fluxoOperadorasHorizontal(fluxoOperadoras, eixoX);
 
 
-        function atualizaGrafico () {
-            var operadoras = d3.selectAll('#operadoras-horizontal svg');
+        function atualizaGrafico() {
 
-            var dataIntermediate = parametrosEixoX.map(function (parametro) {
-                return relacaoLigacoesOperadoras.map(function (relacaoOperadora) {
-                    return { x: relacaoOperadora.nome, y: relacaoOperadora[parametro], legenda: parametro };
+
+            var dataIntermediate = [
+                'falhas',
+                'atendidas',
+                'naoatendidas',
+                'ocupadas',
+                'congestionada',
+                'blackList',].map(function (parametro) {
+                    return [{
+                        nome: 'OI',
+                        falhas: 78,
+                        atendidas: 183,
+                        naoatendidas: 43,
+                        ocupadas: 20,
+                        congestionada: 18,
+                        blackList: 2
+                    }, {
+                        nome: 'Sei la',
+                        falhas: 189,
+                        atendidas: 50,
+                        naoatendidas: 35,
+                        ocupadas: 47,
+                        congestionada: 6,
+                        blackList: 0
+                    }].map(function (relacaoOperadora) {
+                        return { x: relacaoOperadora.nome, y: relacaoOperadora[parametro], legenda: parametro };
+                    });
                 });
-            });
 
 
             var dataStackLayout = d3.layout.stack()(dataIntermediate);
@@ -83,7 +105,40 @@
                     };
                 });
             });
-   
+
+            var svg = d3.selectAll('#operadoras-horizontal svg');
+
+            var groups = svg.selectAll('g')
+                .data(dataset)
+                .enter()
+                .append('g');
+
+            var rects = groups.selectAll('rect')
+                .data(function (d) {
+                    return d;
+                })
+                .enter()
+                .append('rect')
+                .attr('x', function (d) {
+                    return x(d.x0);
+                })
+                .attr('y', function (d, i) {
+                    return y(d.y);
+                })
+                .attr('height', function (d) {
+                    return y.rangeBand();
+                })
+                .attr('width', function (d) {
+                    return x(d.x);
+                })
+                .attr("class", function (d, i) {
+                    return 'bar ' + d.legenda;
+                })
+
+
+
+
+
         }
     </script>
 
