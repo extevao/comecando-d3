@@ -63,7 +63,8 @@ function fluxoOperadorasHorizontal(data, parametrosEixoX) {
     var groups = svg.selectAll('g')
         .data(dataset)
         .enter()
-        .append('g');
+        .append('g')
+        .attr("class", "layer");
     
     var rects = groups.selectAll('rect')
         .data(function (d) {

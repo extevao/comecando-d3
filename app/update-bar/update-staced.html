@@ -98,6 +98,7 @@
         function update(){
            svg.selectAll(".layer").remove();
 
+    
            d3.tsv("crimea1.tsv", type, function (error, crimea) {
             if (error) throw error;
 
