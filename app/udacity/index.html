@@ -1,15 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <title>Novo udacity</title>
-        <meta charset="UTF-8">
-        <script src="../d3/d3.v3.min.js"></script>
 
-    </head>
-    <body>
-    
-    <script src="bar-char.js">
-  
+<head>
+    <title>Novo udacity</title>
+    <meta charset="UTF-8">
+    <script src="../d3/d3.v3.min.js"></script>
+    <style>
+        .chart rect {
+            fill: steelblue;
+        }
+        
+        .chart text {
+            fill: white;
+            font: 10px sans-serif;
+            text-anchor: end;
+        }
+    </style>
+
+</head>
+
+<body>
+    <svg class="chart"></svg>
+    <script src="bar-char.js"></script>
+    <script>
+        draw([{
+                name: 'Locke',
+                value: 4
+            },
+            {
+                name: 'Reyes',
+                value: 8
+            },
+            {
+                name: 'Ford',
+                value: 15
+            },
+            {
+                name: 'Jarrah',
+                value: 16
+            },
+            {
+                name: 'Shephard',
+                value: 23
+            },
+            {
+                name: 'Kwon',
+                value: 42
+            }
+        ]);
     </script>
-    </body>
+</body>
+
 </html>

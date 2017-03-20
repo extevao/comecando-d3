@@ -5,13 +5,14 @@ function atualizandoElementosJaExistentes() {
         .enter()
         .append('p')
         .text(function (d) {
-            return `Eu sou o número ${d}!`;
+            return `Eu sou um número ${d}!`;
         });
 
-
-    p.style('color', 'blue')
+    //atualizando os dados
+    p.data([4, 8, 15, 16, 23, 42])
+        .style('color', 'blue')
         .text(function (d) {
-            return `Eu sou o número atualizado ${d}!`;
+            return `Eu ffesfui atualizado porra sou um número ${d}!`;
         });
 }
 
@@ -35,7 +36,7 @@ var circle2 = canvas.append('circle')
 
 d3.selectAll('circle')
     .data(data)
-    .attr('r', function(d){
+    .attr('r', function (d) {
         return d;
     })
     .exit()

@@ -72,19 +72,58 @@
                 'naoatendidas',
                 'ocupadas',
                 'congestionada',
-                'blackList',].map(function (parametro) {
-                    return [{
+                'blackList',
+            ].map(function (parametro) {
+                return [{
+                        nome: '13',
+                        falhas: 10,
+                        atendidas: 50,
+                        naoatendidas: 35,
+                        ocupadas: 50,
+                        congestionada: 0,
+                        blackList: 0
+                    }, {
+                        nome: 'GVT',
+                        falhas: 5,
+                        atendidas: 35,
+                        naoatendidas: 30,
+                        ocupadas: 25,
+                        congestionada: 8,
+                        blackList: 9
+                    },
+                    {
+                        nome: 'Copel',
+                        falhas: 4,
+                        atendidas: 60,
+                        naoatendidas: 40,
+                        ocupadas: 50,
+                        congestionada: 18,
+                        blackList: 10
+                    }, {
                         nome: 'OI',
-                        falhas: 78,
-                        atendidas: 183,
+                        falhas: 8,
+                        atendidas: 65,
                         naoatendidas: 43,
                         ocupadas: 20,
                         congestionada: 18,
                         blackList: 2
-                    }].map(function (relacaoOperadora) {
-                        return { x: relacaoOperadora.nome, y: relacaoOperadora[parametro], legenda: parametro };
-                    });
+                    }, {
+                        nome: 'Sei la',
+                        falhas: 43,
+                        atendidas: 50,
+                        naoatendidas: 35,
+                        ocupadas: 47,
+                        congestionada: 6,
+                        blackList: 0
+                    }
+                ].map(function (relacaoOperadora) {
+                    return {
+                        x: relacaoOperadora.nome,
+                        y: relacaoOperadora[parametro],
+                        legenda: parametro
+                    };
                 });
+            });
 
 
             var dataStackLayout = d3.layout.stack()(dataIntermediate);
@@ -101,7 +140,12 @@
             });
 
 
-            var margin = { top: 20, right: 30, bottom: 30, left: 110 };
+            var margin = {
+                top: 20,
+                right: 30,
+                bottom: 30,
+                left: 110
+            };
             var width = 500 - margin.left - margin.right;
             var height = 100 - margin.top - margin.bottom;
 
@@ -137,14 +181,14 @@
             /* FIM criando legenda do eixo x */
 
 
-            console.log(dataset)
             var groups = svg.selectAll('g')
                 .data(dataset);
 
-            console.log(groups)
-
 
             var rects = groups.selectAll('rect')
+                .data(function (d) {
+                    return d;
+                })
                 .attr('x', function (d) {
                     return x(d.x0);
                 })
@@ -162,7 +206,7 @@
                 });
 
 
-       
+
 
 
 
