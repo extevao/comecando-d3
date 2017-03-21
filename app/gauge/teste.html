@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Tste</title>
+    <meta charset="UTF-8">
+    <script src="../d3/d3.v3.min.js"></script>
+    <style>
+        #path1 {
+            fill: #3182bd;
+        }
+        
+        #path2 {
+            fill: red;
+        }
+        
+        #path3 {
+            fill: yellow;
+        }
+        
+        text {
+            font-family: "American Typewriter", Helvetica, Arial, sans-serif;
+            font-size: 50px;
+        }
+        
+        #path2 {
+            fill: red;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <script>
+        // building arcing text, from ex. http://bl.ocks.org/mbostock/3151318
+        var width = 400,
+            height = 400;
+
+        var arcs = [
+            {
+                "id": 1,
+                "innerRadius": 100,
+                "outerRadius": 150,
+                "x": 45,
+                "dy": 45,
+                "text": "About"
+            },
+            {
+                "id": 2,
+                "innerRadius": 155,
+                "outerRadius": 210,
+                "x": 45,
+                "dy": -15,
+                "text": "Github"
+            },
+            {
+                "id": 3,
+                "innerRadius": 215,
+                "outerRadius": 265,
+                "x": 45,
+                "dy": -75,
+                "text": "Contact"
+            }
+        ];
+
+        // arcs default settings - inner and outer radii, start and end angle
+        var arc = d3.svg.arc()
+            .innerRadius(100)
+            .outerRadius(150)
+            .startAngle(0)
+            .endAngle(function (t) { return t * 2 * Math.PI / 4; });
+
+
+        // canvas
+        var canvas = d3.select("svg")
+            .attr({ "width": width, "height": height })
+            .append("g")
+            .attr("transform", "translate(0,300)");
+
+        // text paths
+        canvas.append("defs").append("path")
+            .attr("id", "text-path")
+            .attr("d", arc(1));
+
+        canvas.selectAll("path.arc").data(arcs)
+            .enter().append("path")
+            .attr("class", "arc")
+            .attr("id", function (d, i) { return "path" + (i + 1); })
+            .transition()
+            .duration(function (d, i) { return 6000 - i * 2000; })
+            .attrTween("d", function (d, i) {
+                return d3.svg.arc()
+                    .innerRadius(d.innerRadius)
+                    .outerRadius(d.outerRadius)
+                    .startAngle(0)
+                    .endAngle(function (t) { return t * 2 * Math.PI / 4; });
+            });
+
+        canvas.selectAll("clipPath").data(arcs)
+            .enter().append("clipPath")
+            .attr("id", function (d, i) { return "text-clip" + i; })
+            .append("use")
+            .attr("xlink:href", function (d, i) { return "#path" + (i + 1); });
+
+        canvas.selectAll("text").data(arcs)
+            .enter().append("text")
+            .attr("clip-path", function (d, i) { return "url(#text-clip" + i + ")"; })
+            .attr("x", function (d) { return d.x; })
+            .attr("dy", function (d) { return d.dy; })
+            .append("textPath")
+            .attr("xlink:href", "#text-path")
+            .text(function (d) { return d.text; });
+    </script>
+</body>
+
+</html>

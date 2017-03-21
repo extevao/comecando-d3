@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Primeiro arco</title>
+    <meta charset="UTF-8">
+    <script src="../d3/d3.v3.min.js"></script>
+</head>
+
+<body>
+
+    <script>
+        //Create the SVG
+        var svg = d3.select("body").append("svg")
+            .attr("width", 400)
+            .attr("height", 120);
+
+        //Create an SVG path			
+        svg.append("path")
+            .attr("id", "wavy") //very important to give the path element a unique ID to reference later
+            .attr("d", "M 0,300 A 200,200 0 0,1 400,300") //Notation for an SVG path, from bl.ocks.org/mbostock/2565344
+            .style("fill", "none")
+            .style("stroke", "#AAAAAA");
+
+    
+    </script>
+</body>
+
+</html>
