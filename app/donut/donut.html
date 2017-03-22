@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <script src="../d3/d3.v3.min.js"></script>
+</head>
+
+<body>
+    <div id="maluca"></div>
+    <button type="button" onclick="atualiza()">Atualiza</button>
+    <script>
+        function atualiza() {
+            var novos = [
+                { situacao: 'falha', total: 70, color: '#C0362E' },
+                { situacao: 'atendidas', total: 30, color: '#71912D' }
+            ];
+            d3.select('#maluca').selectAll("svg").remove();
+            totalizador(novos, 100);
+        }
+        var dados = [
+            { situacao: 'falha', total: 70, color: '#C0362E' },
+            { situacao: 'atendidas', total: 25, color: '#71912D' },
+            { situacao: 'nao atendidas', total: 5, color: '#B9A938' }
+        ];
+
+        totalizador(dados, 70);
+        function totalizador(data, total) {
+            var width = 55,
+                height = 55,
+                radius = Math.min(width, height) / 2;
+
+            var arc = d3.svg.arc()
+                .outerRadius(radius - 10)
+                .innerRadius(radius - 5);
+
+            var pie = d3.layout.pie()
+                .sort(null)
+                .value(function (d) { return d.total; });
+
+            var svg = d3.select("#maluca").append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .append("g")
+                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+            var g = svg.selectAll(".arc")
+                .data(pie(data))
+                .enter().append("g")
+                .attr("class", "arc");
+
+            g.append("path")
+                .attr("d", arc)
+                .style("fill", function (d) { return d.data.color });
+
+
+
+            svg
+                .append("text")
+                .attr("class", "legenda-total")
+                .attr("dy", "0.35em")
+                .attr("text-anchor", "middle")
+                .text(total);
+        }
+    </script>
+</body>
+
+</html>
