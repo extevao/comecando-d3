@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Semi</title>
+    <script src="../d3/d3.v3.min.js"></script>
+    <style>
+        body {
+            background-color: #ccc;
+            width: 100%;
+            font-family: 'Roboto', sans-serif;
+            height: 100%;
+        }
+        
+        .falhas {
+            fill: #C0362E;
+        }
+        
+        .widget {
+            margin: 0 auto;
+            width: 350px;
+            margin-top: 50px;
+            background-color: #fff;
+            -background-color: #222D3A;
+            border-radius: 5px;
+            box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header {
+            background-color: #eee;
+            height: 40px;
+            color: #555;
+            text-align: center;
+            line-height: 40px;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+            font-weight: 400;
+            font-size: 1.5em;
+            text-shadow: 1px 1px #fff;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .chart-container {
+            padding: 25px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <button type="button" onclick="atualizar()">Atualizar</button>
+    <div id="chart" class="chart-container">
+
+    </div>
+
+    <script>
+        var valores = [{
+            nome: 'falhas',
+            valor: 40,
+            cor: '#C0362E'
+        }, {
+            nome: 'Nao Atendidas',
+            valor: 65,
+            cor: '#B9A938'
+        }, {
+            nome: 'Teste',
+            valor: 85,
+            cor: '#D68233'
+        }];
+        var total = 85;
+        valores.forEach(function (elemento) {
+            teste(elemento.valor, elemento.cor, elemento.nome);
+        });
+
+        function atualizar() {
+            var valores = [{
+                nome: 'falhas',
+                valor: 10,
+                cor: '#C0362E'
+            }];
+            var total = 85;
+            valores.forEach(function (elemento) {
+                d3.select('#chart').selectAll("svg").remove();
+                teste(elemento.valor, elemento.cor, elemento.nome);
+            });
+        }
+
+        function teste(percent, cor, nome) {
+
+            var ratio = percent / 100;
+
+            var pie = d3.layout.pie()
+                .value(function (d) { return d })
+                .sort(null);
+
+            var w = 75, h = 75;
+
+            var outerRadius = (w / 2) - 10;
+            var innerRadius = 20;
+
+
+            var color = ['#ececec', '#f06b3e', '#888888'];
+
+
+            var arc = d3.svg.arc()
+                .innerRadius(innerRadius)
+                .outerRadius(outerRadius)
+                .startAngle(0)
+                .endAngle(Math.PI);
+
+
+            var arcLine = d3.svg.arc()
+                .innerRadius(innerRadius)
+                .outerRadius(outerRadius)
+                .startAngle(0);
+
+            var svg = d3.select("#chart")
+                .append("svg")
+                .attr({
+                    width: w,
+                    height: h,
+                    class: 'shadow'
+                }).append('g')
+                .attr({
+                    transform: 'translate(' + w / 2 + ',' + h / 2 + ')'
+                });
+
+
+
+            var path = svg.append('path')
+                .attr({
+                    d: arc,
+                    transform: 'rotate(-90)'
+                }).attr({
+                    'stroke-width': "1",
+                    stroke: "#666666"
+                })
+                .style({
+                    fill: color[0]
+                });
+
+
+            var pathForeground = svg.append('path')
+                .datum({ endAngle: 0 })
+                .attr({
+                    d: arcLine,
+                    transform: 'rotate(-90)'
+                })
+                .attr('class', nome);
+
+
+            var middleCount = svg.append('text')
+                .datum(0)
+                .text(function (d) {
+                    return d;
+                })
+                .attr({
+                    class: 'middleText',
+                    'text-anchor': 'middle',
+                    dy: 0,
+                    dx: 3
+                })
+                .style({
+                    fill: d3.rgb('#000000'),
+                    'font-size': '10px'
+                });
+
+            var oldValue = 0;
+            var arcTween = function (transition, newValue, oldValue) {
+                transition.attrTween("d", function (d) {
+                    var interpolate = d3.interpolate(d.endAngle, ((Math.PI)) * (newValue / 100));
+
+                    var interpolateCount = d3.interpolate(oldValue, newValue);
+
+                    return function (t) {
+                        d.endAngle = interpolate(t);
+                        middleCount.text(Math.floor(interpolateCount(t)) + '%');
+
+                        return arcLine(d);
+                    };
+                });
+            };
+
+
+            pathForeground.transition()
+                .duration(750)
+                .ease('cubic')
+                .call(arcTween, percent, oldValue);
+        }
+    </script>
+</body>
+
+</html>
